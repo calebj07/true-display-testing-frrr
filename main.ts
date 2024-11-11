@@ -1,4 +1,4 @@
-function draw_a(x: number, y: number) {
+function a(x: number, y: number, spacing: number) {
     OLED12864_I2C.pixel(x + 1, y + 2, 1)
     OLED12864_I2C.pixel(x + 2, y + 3, 1)
     OLED12864_I2C.vline(x, y + 3, 3, 1)
@@ -9,7 +9,7 @@ function draw_a(x: number, y: number) {
 }
 
 //  width of letter
-function draw_b(x: number, y: number) {
+function b(x: number, y: number, spacing: number) {
     OLED12864_I2C.vline(x, y, 7, 1)
     OLED12864_I2C.pixel(x + 1, y + 3, 1)
     OLED12864_I2C.pixel(x + 2, y + 2, 1)
@@ -20,7 +20,7 @@ function draw_b(x: number, y: number) {
 }
 
 //  width of letter
-function draw_k(x: number, y: number) {
+function k(x: number, y: number, spacing: number) {
     OLED12864_I2C.vline(x, y, 7, 1)
     OLED12864_I2C.pixel(x + 3, y + 2, 1)
     OLED12864_I2C.pixel(x + 2, y + 3, 1)
@@ -31,38 +31,35 @@ function draw_k(x: number, y: number) {
 }
 
 //  width of letter
-function draw_c(x: number, y: number) {
-    OLED12864_I2C.pixel(x + 1, y + 2, 1)
-    OLED12864_I2C.pixel(x + 2, y + 2, 1)
+function c(x: number, y: number, spacing: number) {
+    OLED12864_I2C.hline(x + 1, y + 2, 2, 1)
     OLED12864_I2C.vline(x, y + 3, 3, 1)
-    OLED12864_I2C.pixel(x + 1, y + 6, 1)
-    OLED12864_I2C.pixel(x + 2, y + 6, 1)
+    OLED12864_I2C.hline(x + 1, y + 6, 2, 1)
     return 3 + spacing
 }
 
 //  width of letter
-function draw_i(x: number, y: number) {
+function i(x: number, y: number, spacing: number) {
     OLED12864_I2C.pixel(x + 0, y + 2, 1)
     OLED12864_I2C.vline(x, y + 4, 3, 1)
     return 1 + spacing
 }
 
 //  width of letter
-function draw_s(x: number, y: number) {
-    OLED12864_I2C.pixel(x + 1, y + 2, 1)
-    OLED12864_I2C.pixel(x + 2, y + 2, 1)
-    OLED12864_I2C.pixel(x + 3, y + 2, 1)
+function s(x: number, y: number, spacing: number) {
+    OLED12864_I2C.hline(x + 1, y + 2, 2, 1)
     OLED12864_I2C.pixel(x + 0, y + 3, 1)
     OLED12864_I2C.pixel(x + 1, y + 4, 1)
-    OLED12864_I2C.pixel(x + 2, y + 4, 1)
-    OLED12864_I2C.pixel(x + 3, y + 5, 1)
-    OLED12864_I2C.pixel(x + 2, y + 6, 1)
-    OLED12864_I2C.pixel(x + 1, y + 6, 1)
-    OLED12864_I2C.pixel(x + 0, y + 6, 1)
-    return 4 + spacing
+    OLED12864_I2C.pixel(x + 2, y + 5, 1)
+    OLED12864_I2C.hline(x, y + 6, 2, 1)
+    return 3 + spacing
 }
 
 //  width of letter
+function space(): number {
+    return 2
+}
+
 //  Starting position
 let x = 1
 //  starting x position
@@ -71,9 +68,27 @@ let y = 0
 let spacing = 1
 //  space between letters
 //  Draw each letter and update x position
-x += draw_s(x, y)
-x += draw_i(x, y)
-x += draw_c(x, y)
-x += draw_k(x, y)
-x += draw_a(x, y)
-x += draw_b(x, y)
+OLED12864_I2C.clear()
+function draw_text(text: string, x: number, y: number, spacing: number) {
+    for (let char of text) {
+        if (char == "a") {
+            x += a(x, y, spacing)
+        } else if (char == "b") {
+            x += b(x, y, spacing)
+        } else if (char == "c") {
+            x += c(x, y, spacing)
+        } else if (char == "i") {
+            x += i(x, y, spacing)
+        } else if (char == "k") {
+            x += k(x, y, spacing)
+        } else if (char == "s") {
+            x += s(x, y, spacing)
+        } else if (char == " ") {
+            x += space()
+        }
+        
+    }
+}
+
+//  Example usage
+draw_text("sick ab", x, y, spacing)
