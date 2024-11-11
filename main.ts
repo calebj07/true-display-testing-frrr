@@ -56,6 +56,34 @@ function s(x: number, y: number, spacing: number) {
 }
 
 //  width of letter
+function d(x: number, y: number, spacing: number) {
+    OLED12864_I2C.vline(x, y, 7, 1)
+    OLED12864_I2C.pixel(x + 1, y + 2, 1)
+    OLED12864_I2C.pixel(x + 2, y + 3, 1)
+    OLED12864_I2C.pixel(x + 2, y + 4, 1)
+    OLED12864_I2C.pixel(x + 1, y + 5, 1)
+    OLED12864_I2C.hline(x + 1, y + 6, 2, 1)
+    return 4 + spacing
+}
+
+//  width of letter
+function e(x: number, y: number, spacing: number) {
+    OLED12864_I2C.hline(x + 1, y + 2, 2, 1)
+    OLED12864_I2C.vline(x, y + 3, 3, 1)
+    OLED12864_I2C.hline(x + 1, y + 4, 2, 1)
+    OLED12864_I2C.hline(x + 1, y + 6, 2, 1)
+    return 3 + spacing
+}
+
+//  width of letter
+function f(x: number, y: number, spacing: number) {
+    OLED12864_I2C.hline(x + 1, y + 2, 2, 1)
+    OLED12864_I2C.vline(x, y + 3, 7, 1)
+    OLED12864_I2C.hline(x + 1, y + 4, 2, 1)
+    return 3 + spacing
+}
+
+//  width of letter
 function space(): number {
     return 2
 }
@@ -77,6 +105,12 @@ function draw_text(text: string, x: number, y: number, spacing: number) {
             x += b(x, y, spacing)
         } else if (char == "c") {
             x += c(x, y, spacing)
+        } else if (char == "d") {
+            x += d(x, y, spacing)
+        } else if (char == "e") {
+            x += e(x, y, spacing)
+        } else if (char == "f") {
+            x += f(x, y, spacing)
         } else if (char == "i") {
             x += i(x, y, spacing)
         } else if (char == "k") {
@@ -91,4 +125,4 @@ function draw_text(text: string, x: number, y: number, spacing: number) {
 }
 
 //  Example usage
-draw_text("sick ab", x, y, spacing)
+draw_text("sick ab def", x, y, spacing)

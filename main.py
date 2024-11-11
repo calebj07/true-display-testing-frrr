@@ -44,6 +44,27 @@ def s(x: int, y: int, spacing: int):
     OLED12864_I2C.hline(x, y + 6, 2, 1)
     return 3 + spacing  # width of letter
 
+def d(x: int, y: int, spacing: int):
+    OLED12864_I2C.vline(x, y, 7, 1)
+    OLED12864_I2C.pixel(x + 1, y + 2, 1)
+    OLED12864_I2C.pixel(x + 2, y + 3, 1)
+    OLED12864_I2C.pixel(x + 2, y + 4, 1)
+    OLED12864_I2C.pixel(x + 1, y + 5, 1)
+    OLED12864_I2C.hline(x + 1, y + 6, 2, 1)
+    return 4 + spacing  # width of letter
+
+def e(x: int, y: int, spacing: int):
+    OLED12864_I2C.hline(x + 1, y + 2, 2, 1)
+    OLED12864_I2C.vline(x, y + 3, 3, 1)
+    OLED12864_I2C.hline(x + 1, y + 4, 2, 1)
+    OLED12864_I2C.hline(x + 1, y + 6, 2, 1)
+    return 3 + spacing  # width of letter
+
+def f(x: int, y: int, spacing: int):
+    OLED12864_I2C.hline(x + 1, y + 2, 2, 1)
+    OLED12864_I2C.vline(x, y + 3, 7, 1)
+    OLED12864_I2C.hline(x + 1, y + 4, 2, 1)
+    return 3 + spacing  # width of letter
 def space():
     return 2
 
@@ -62,6 +83,12 @@ def draw_text(text: str, x: int, y: int, spacing: int):
             x += b(x, y, spacing)
         elif char == 'c':
             x += c(x, y, spacing)
+        elif char == 'd':
+            x += d(x, y, spacing)
+        elif char == 'e':
+            x += e(x, y, spacing)
+        elif char == 'f':
+            x += f(x, y, spacing)
         elif char == 'i':
             x += i(x, y, spacing)
         elif char == 'k':
@@ -72,4 +99,4 @@ def draw_text(text: str, x: int, y: int, spacing: int):
             x += space()
 
 # Example usage
-draw_text("sick ab", x, y, spacing)
+draw_text("sick ab def", x, y, spacing)
