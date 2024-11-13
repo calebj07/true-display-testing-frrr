@@ -146,7 +146,7 @@ def s(x: int, y: int, spacing: int):
 def t(x: int, y: int, spacing: int):
     OLED12864_I2C.hline(x, y + 3, 3, 1)      # Horizontal line in middle
     OLED12864_I2C.vline(x + 1, y, 7, 1)  # Vertical line through center
-    return 2 + spacing  # width of letter
+    return 3 + spacing  # width of letter
 
 def u(x: int, y: int, spacing: int):
     OLED12864_I2C.vline(x, y + 2, 4, 1)      # Left vertical line
@@ -156,16 +156,47 @@ def u(x: int, y: int, spacing: int):
     return 4 + spacing  # width of letter
 
 def v(x: int, y: int, spacing: int):
-    OLED12864_I2C.vline(x, y + 2, 3, 1)      # Left vertical line
-    OLED12864_I2C.vline(x + 4, y + 2, 3, 1)  # Right vertical line
-    OLED12864_I2C.pixel(x + 1, y + 5, 1)     # Bottom left diagonal
-    OLED12864_I2C.pixel(x + 3, y + 5, 1)     # Bottom right diagonal
-    OLED12864_I2C.pixel(x + 2, y + 6, 1)     # Bottom point
+    OLED12864_I2C.vline(x, y + 2, 4, 1)      # Left vertical line
+    OLED12864_I2C.vline(x + 2, y + 2, 4, 1)  # Right vertical line
+    OLED12864_I2C.pixel(x + 1, y + 6, 1)     # Bottom middle point
+    return 3 + spacing  # width of letter
+
+def w(x: int, y: int, spacing: int):
+    OLED12864_I2C.vline(x, y + 2, 4, 1)      # Left vertical line
+    OLED12864_I2C.vline(x + 2, y + 2, 4, 1)  # Middle vertical line
+    OLED12864_I2C.vline(x + 4, y + 2, 4, 1)  # Right vertical line
+    OLED12864_I2C.pixel(x + 1, y + 6, 1)     # Bottom left dot
+    OLED12864_I2C.pixel(x + 3, y + 6, 1)     # Bottom right dot
     return 5 + spacing  # width of letter
+
+def x_(x: int, y: int, spacing: int):
+    OLED12864_I2C.vline(x + 1, y + 4, 2, 1)  # Left middle vertical line
+    OLED12864_I2C.vline(x + 2, y + 4, 2, 1)  # Right middle vertical line
+    OLED12864_I2C.pixel(x, y + 3, 1)         # Top left dot
+    OLED12864_I2C.pixel(x + 3, y + 3, 1)     # Top right dot
+    OLED12864_I2C.pixel(x, y + 6, 1)         # Bottom left dot
+    OLED12864_I2C.pixel(x + 3, y + 6, 1)     # Bottom right dot
+    return 4 + spacing  # width of letter
+
+def y_(x: int, y: int, spacing: int):
+    OLED12864_I2C.vline(x + 2, y + 5, 3, 1)  # Middle vertical line
+    OLED12864_I2C.pixel(x, y + 3, 1)         # Top left dot
+    OLED12864_I2C.pixel(x + 4, y + 3, 1)     # Top right dot
+    OLED12864_I2C.pixel(x + 1, y + 4, 1)     # Upper middle left dot
+    OLED12864_I2C.pixel(x + 3, y + 4, 1)     # Upper middle right dot
+    OLED12864_I2C.pixel(x + 1, y + 8, 1)     # Lower left curve dot
+    OLED12864_I2C.pixel(x, y + 9, 1)         # Bottom dot
+    return 5 + spacing  # width of letter
+
+def z_(x: int, y: int, spacing: int):
+    OLED12864_I2C.hline(x, y + 3, 4, 1)     # Top horizontal line
+    OLED12864_I2C.hline(x, y + 6, 4, 1)     # Bottom horizontal line
+    OLED12864_I2C.pixel(x + 2, y + 4, 1)    # Upper middle dot
+    OLED12864_I2C.pixel(x + 1, y + 5, 1)    # Lower middle dot
+    return 4 + spacing  # width of letter
 
 def space():
     return 1
-
 # Starting position
 x = 1  # starting x position
 y = 0  # starting y position
@@ -219,8 +250,15 @@ def draw_text(text: str, x: int, y: int, spacing: int):
             x += u(x, y, spacing)
         elif char == 'v':
             x += v(x, y, spacing)
+        elif char == 'w':
+            x += w(x, y, spacing)
+        elif char == 'x':
+            x += x_(x, y, spacing)
+        elif char == 'y':
+            x += y_(x, y, spacing)
+        elif char == 'z':
+            x += z_(x, y, spacing)
         elif char == ' ':
             x += space()
-
 # Example usage
-draw_text("abcdefghijklmnopqrstuv", x, y, spacing)
+draw_text("abcdefghijklmnopqrstuvwxyz", x, y, spacing)

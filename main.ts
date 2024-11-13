@@ -186,7 +186,7 @@ function t(x: number, y: number, spacing: number) {
     //  Horizontal line in middle
     OLED12864_I2C.vline(x + 1, y, 7, 1)
     //  Vertical line through center
-    return 2 + spacing
+    return 3 + spacing
 }
 
 //  width of letter
@@ -204,17 +204,77 @@ function u(x: number, y: number, spacing: number) {
 
 //  width of letter
 function v(x: number, y: number, spacing: number) {
-    OLED12864_I2C.vline(x, y + 2, 3, 1)
+    OLED12864_I2C.vline(x, y + 2, 4, 1)
     //  Left vertical line
-    OLED12864_I2C.vline(x + 4, y + 2, 3, 1)
+    OLED12864_I2C.vline(x + 2, y + 2, 4, 1)
     //  Right vertical line
-    OLED12864_I2C.pixel(x + 1, y + 5, 1)
-    //  Bottom left diagonal
-    OLED12864_I2C.pixel(x + 3, y + 5, 1)
-    //  Bottom right diagonal
-    OLED12864_I2C.pixel(x + 2, y + 6, 1)
-    //  Bottom point
+    OLED12864_I2C.pixel(x + 1, y + 6, 1)
+    //  Bottom middle point
+    return 3 + spacing
+}
+
+//  width of letter
+function w(x: number, y: number, spacing: number) {
+    OLED12864_I2C.vline(x, y + 2, 4, 1)
+    //  Left vertical line
+    OLED12864_I2C.vline(x + 2, y + 2, 4, 1)
+    //  Middle vertical line
+    OLED12864_I2C.vline(x + 4, y + 2, 4, 1)
+    //  Right vertical line
+    OLED12864_I2C.pixel(x + 1, y + 6, 1)
+    //  Bottom left dot
+    OLED12864_I2C.pixel(x + 3, y + 6, 1)
+    //  Bottom right dot
     return 5 + spacing
+}
+
+//  width of letter
+function x_(x: number, y: number, spacing: number) {
+    OLED12864_I2C.vline(x + 1, y + 4, 2, 1)
+    //  Left middle vertical line
+    OLED12864_I2C.vline(x + 2, y + 4, 2, 1)
+    //  Right middle vertical line
+    OLED12864_I2C.pixel(x, y + 3, 1)
+    //  Top left dot
+    OLED12864_I2C.pixel(x + 3, y + 3, 1)
+    //  Top right dot
+    OLED12864_I2C.pixel(x, y + 6, 1)
+    //  Bottom left dot
+    OLED12864_I2C.pixel(x + 3, y + 6, 1)
+    //  Bottom right dot
+    return 4 + spacing
+}
+
+//  width of letter
+function y_(x: number, y: number, spacing: number) {
+    OLED12864_I2C.vline(x + 2, y + 5, 3, 1)
+    //  Middle vertical line
+    OLED12864_I2C.pixel(x, y + 3, 1)
+    //  Top left dot
+    OLED12864_I2C.pixel(x + 4, y + 3, 1)
+    //  Top right dot
+    OLED12864_I2C.pixel(x + 1, y + 4, 1)
+    //  Upper middle left dot
+    OLED12864_I2C.pixel(x + 3, y + 4, 1)
+    //  Upper middle right dot
+    OLED12864_I2C.pixel(x + 1, y + 8, 1)
+    //  Lower left curve dot
+    OLED12864_I2C.pixel(x, y + 9, 1)
+    //  Bottom dot
+    return 5 + spacing
+}
+
+//  width of letter
+function z_(x: number, y: number, spacing: number) {
+    OLED12864_I2C.hline(x, y + 3, 4, 1)
+    //  Top horizontal line
+    OLED12864_I2C.hline(x, y + 6, 4, 1)
+    //  Bottom horizontal line
+    OLED12864_I2C.pixel(x + 2, y + 4, 1)
+    //  Upper middle dot
+    OLED12864_I2C.pixel(x + 1, y + 5, 1)
+    //  Lower middle dot
+    return 4 + spacing
 }
 
 //  width of letter
@@ -277,6 +337,14 @@ function draw_text(text: string, x: number, y: number, spacing: number) {
             x += u(x, y, spacing)
         } else if (char == "v") {
             x += v(x, y, spacing)
+        } else if (char == "w") {
+            x += w(x, y, spacing)
+        } else if (char == "x") {
+            x += x_(x, y, spacing)
+        } else if (char == "y") {
+            x += y_(x, y, spacing)
+        } else if (char == "z") {
+            x += z_(x, y, spacing)
         } else if (char == " ") {
             x += space()
         }
@@ -285,4 +353,4 @@ function draw_text(text: string, x: number, y: number, spacing: number) {
 }
 
 //  Example usage
-draw_text("abcdefghijklmnopqrstuv", x, y, spacing)
+draw_text("abcdefghijklmnopqrstuvwxyz", x, y, spacing)
