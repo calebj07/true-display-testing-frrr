@@ -86,10 +86,10 @@ function i(x: number, y: number, spacing: number) {
 
 //  width of letter
 function j(x: number, y: number, spacing: number) {
-    OLED12864_I2C.pixel(x + 1, y + 2, 1)
-    OLED12864_I2C.vline(x + 1, y + 4, 5, 1)
-    OLED12864_I2C.pixel(x - 1, y + 8, 1)
-    OLED12864_I2C.pixel(x, y + 9, 1)
+    OLED12864_I2C.pixel(x, y + 2, 1)
+    OLED12864_I2C.vline(x, y + 4, 5, 1)
+    OLED12864_I2C.pixel(x - 2, y + 8, 1)
+    OLED12864_I2C.pixel(x - 1, y + 9, 1)
     return 1 + spacing
 }
 
@@ -101,6 +101,51 @@ function k(x: number, y: number, spacing: number) {
     OLED12864_I2C.pixel(x + 1, y + 4, 1)
     OLED12864_I2C.pixel(x + 2, y + 5, 1)
     OLED12864_I2C.pixel(x + 3, y + 6, 1)
+    return 4 + spacing
+}
+
+//  width of letter
+function l(x: number, y: number, spacing: number) {
+    OLED12864_I2C.vline(x, y, 7, 1)
+    return 1 + spacing
+}
+
+//  width of letter
+function m(x: number, y: number, spacing: number) {
+    OLED12864_I2C.vline(x, y + 2, 5, 1)
+    OLED12864_I2C.pixel(x + 1, y + 3, 1)
+    OLED12864_I2C.vline(x + 2, y + 4, 3, 1)
+    OLED12864_I2C.pixel(x + 3, y + 3, 1)
+    OLED12864_I2C.vline(x + 4, y + 4, 3, 1)
+    return 5 + spacing
+}
+
+//  width of letter
+function n(x: number, y: number, spacing: number) {
+    OLED12864_I2C.vline(x, y + 2, 5, 1)
+    OLED12864_I2C.pixel(x + 1, y + 3, 1)
+    OLED12864_I2C.pixel(x + 2, y + 2, 1)
+    OLED12864_I2C.vline(x + 3, y + 3, 4, 1)
+    return 4 + spacing
+}
+
+//  width of letter
+function o(x: number, y: number, spacing: number) {
+    OLED12864_I2C.hline(x + 1, y + 2, 2, 1)
+    OLED12864_I2C.vline(x, y + 3, 3, 1)
+    OLED12864_I2C.vline(x + 3, y + 3, 3, 1)
+    OLED12864_I2C.hline(x + 1, y + 6, 2, 1)
+    return 4 + spacing
+}
+
+//  width of letter
+function p(x: number, y: number, spacing: number) {
+    OLED12864_I2C.vline(x, y + 2, 8, 1)
+    OLED12864_I2C.pixel(x + 1, y + 3, 1)
+    OLED12864_I2C.pixel(x + 1, y + 5, 1)
+    OLED12864_I2C.pixel(x + 2, y + 2, 1)
+    OLED12864_I2C.pixel(x + 2, y + 6, 1)
+    OLED12864_I2C.vline(x + 3, y + 3, 3, 1)
     return 4 + spacing
 }
 
@@ -152,6 +197,16 @@ function draw_text(text: string, x: number, y: number, spacing: number) {
             x += j(x, y, spacing)
         } else if (char == "k") {
             x += k(x, y, spacing)
+        } else if (char == "l") {
+            x += l(x, y, spacing)
+        } else if (char == "m") {
+            x += m(x, y, spacing)
+        } else if (char == "n") {
+            x += n(x, y, spacing)
+        } else if (char == "o") {
+            x += o(x, y, spacing)
+        } else if (char == "p") {
+            x += p(x, y, spacing)
         } else if (char == "s") {
             x += s(x, y, spacing)
         } else if (char == " ") {
@@ -162,4 +217,4 @@ function draw_text(text: string, x: number, y: number, spacing: number) {
 }
 
 //  Example usage
-draw_text("sick ab defghij", x, y, spacing)
+draw_text("abcdefghijklmnop", x, y, spacing)
