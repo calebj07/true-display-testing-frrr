@@ -278,6 +278,23 @@ function z_(x: number, y: number, spacing: number) {
 }
 
 //  width of letter
+function qs(x: number, y: number, spacing: any) {
+    OLED12864_I2C.hline(x + 1, y, 2, 1)
+    //  Top horizontal line
+    OLED12864_I2C.vline(x + 3, y + 1, 2, 1)
+    //  Right vertical line
+    OLED12864_I2C.pixel(x, y + 1, 1)
+    //  Upper left curve dot
+    OLED12864_I2C.pixel(x + 2, y + 3, 1)
+    //  Middle dot
+    OLED12864_I2C.pixel(x + 1, y + 4, 1)
+    //  Lower middle dot
+    OLED12864_I2C.pixel(x + 1, y + 6, 1)
+    //  Bottom dot
+    return 4 + spacing
+}
+
+//  width of letter
 function space(): number {
     return 1
 }

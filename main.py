@@ -195,6 +195,15 @@ def z_(x: int, y: int, spacing: int):
     OLED12864_I2C.pixel(x + 1, y + 5, 1)    # Lower middle dot
     return 4 + spacing  # width of letter
 
+def qs(x: int, y: int, spacing: int):
+    OLED12864_I2C.hline(x + 1, y, 2, 1)      # Top horizontal line
+    OLED12864_I2C.vline(x + 3, y + 1, 2, 1)  # Right vertical line
+    OLED12864_I2C.pixel(x, y + 1, 1)         # Upper left curve dot
+    OLED12864_I2C.pixel(x + 2, y + 3, 1)     # Middle dot
+    OLED12864_I2C.pixel(x + 1, y + 4, 1)     # Lower middle dot
+    OLED12864_I2C.pixel(x + 1, y + 6, 1)     # Bottom dot
+    return 4 + spacing  # width of letter
+
 def space():
     return 1
 # Starting position
