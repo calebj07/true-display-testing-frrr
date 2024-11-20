@@ -303,6 +303,10 @@ function space(): number {
     return 1
 }
 
+function one(x: any, y: any, spacing: any) {
+    
+}
+
 //  Draw each letter and update x position
 OLED12864_I2C.clear()
 function draw_text(text: string, x: number, y: number, spacing: number) {

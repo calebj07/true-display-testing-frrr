@@ -211,6 +211,9 @@ def qs(x: int, y: int, spacing: int):
 def space():
     return 1
 
+def one(x: int, y: int, spacing: int):
+    pass
+
 # Draw each letter and update x position
 OLED12864_I2C.clear()
 def draw_text(text: str, x: int, y: int, spacing: int):
