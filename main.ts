@@ -61,21 +61,25 @@ function f(x: number, y: number, spacing: number) {
 
 //  width of letter
 function g(x: number, y: number, spacing: number) {
-    OLED12864_I2C.pixel(x + 1, y + 3, 1)
-    OLED12864_I2C.vline(x, y + 4, 2, 1)
-    OLED12864_I2C.vline(x + 2, y + 4, 5, 1)
+    OLED12864_I2C.pixel(x + 1, y + 2, 1)
+    OLED12864_I2C.pixel(x + 2, y + 3, 1)
+    OLED12864_I2C.vline(x, y + 3, 3, 1)
+    OLED12864_I2C.vline(x + 3, y + 2, 7, 1)
     OLED12864_I2C.pixel(x + 1, y + 6, 1)
+    OLED12864_I2C.pixel(x + 2, y + 5, 1)
+    OLED12864_I2C.pixel(x + 2, y + 9, 1)
     OLED12864_I2C.pixel(x + 1, y + 9, 1)
     OLED12864_I2C.pixel(x, y + 8, 1)
-    return 3 + spacing
+    return 4 + spacing
 }
 
 //  width of letter
 function h(x: number, y: number, spacing: number) {
     OLED12864_I2C.vline(x, y, 7, 1)
     OLED12864_I2C.pixel(x + 1, y + 3, 1)
-    OLED12864_I2C.vline(x + 2, y + 4, 3, 1)
-    return 3 + spacing
+    OLED12864_I2C.pixel(x + 2, y + 2, 1)
+    OLED12864_I2C.vline(x + 3, y + 3, 4, 1)
+    return 4 + spacing
 }
 
 //  width of letter
@@ -278,7 +282,7 @@ function z_(x: number, y: number, spacing: number) {
 }
 
 //  width of letter
-function qs(x: number, y: number, spacing: any) {
+function qs(x: number, y: number, spacing: number) {
     OLED12864_I2C.hline(x + 1, y, 2, 1)
     //  Top horizontal line
     OLED12864_I2C.vline(x + 3, y + 1, 2, 1)
@@ -299,17 +303,15 @@ function space(): number {
     return 1
 }
 
-//  Starting position
-let x = 1
-//  starting x position
-let y = 0
-//  starting y position
-let spacing = 1
-//  space between letters
 //  Draw each letter and update x position
 OLED12864_I2C.clear()
 function draw_text(text: string, x: number, y: number, spacing: number) {
     for (let char of text) {
+        if (x >= 124) {
+            x = 0
+            y += 10
+        }
+        
         if (char == "a") {
             x += a(x, y, spacing)
         } else if (char == "b") {
@@ -362,12 +364,23 @@ function draw_text(text: string, x: number, y: number, spacing: number) {
             x += y_(x, y, spacing)
         } else if (char == "z") {
             x += z_(x, y, spacing)
+        } else if (char == "?") {
+            x += qs(x, y, spacing)
         } else if (char == " ") {
             x += space()
+        } else if (char == "^") {
+            x = 0
+            y += 9
         }
         
     }
 }
 
-//  Example usage
-draw_text("abcdefghijklmnopqrstuvwxyz", x, y, spacing)
+//  Starting position
+let x = 0
+//  starting x position
+let y = 0
+//  starting y position
+let spacing = 1
+//  space between letters
+draw_text("abcdefghijklmnopqrstuvwxyz?^lol i can write anything now^one line in^four lines in i guess^theres five^six^seven", x, y, spacing)
