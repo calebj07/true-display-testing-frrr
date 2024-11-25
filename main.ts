@@ -299,12 +299,19 @@ function qs(x: number, y: number, spacing: number) {
 }
 
 //  width of letter
-function space(): number {
-    return 1
+function one(x: number, y: number, spacing: number) {
+    OLED12864_I2C.pixel(x, y + 1, 1)
+    //  Top dot
+    OLED12864_I2C.vline(x + 1, y + 1, 5, 1)
+    //  Middle vertical line
+    OLED12864_I2C.hline(x, y + 6, 3, 1)
+    //  Bottom horizontal line
+    return 4 + spacing
 }
 
-function one(x: any, y: any, spacing: any) {
-    
+//  width of letter
+function space(): number {
+    return 1
 }
 
 //  Draw each letter and update x position
@@ -375,6 +382,8 @@ function draw_text(text: string, x: number, y: number, spacing: number) {
         } else if (char == "^") {
             x = 0
             y += 9
+        } else if (char == "1") {
+            x += one(x, y, spacing)
         }
         
     }
@@ -387,4 +396,4 @@ let y = 0
 //  starting y position
 let spacing = 1
 //  space between letters
-draw_text("abcdefghijklmnopqrstuvwxyz?^lol i can write anything now^one line in^four lines in i guess^theres five^six^seven", x, y, spacing)
+draw_text("abcdefghijklmnopqrstuvwxyz?^lol 1 i can write anything now^one line in^four lines in i guess^theres five^six^seven", x, y, spacing)

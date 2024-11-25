@@ -208,11 +208,14 @@ def qs(x: int, y: int, spacing: int):
     OLED12864_I2C.pixel(x + 1, y + 6, 1)     # Bottom dot
     return 4 + spacing  # width of letter
 
+def one(x: int, y: int, spacing: int):
+    OLED12864_I2C.pixel(x, y + 1, 1)         # Top dot
+    OLED12864_I2C.vline(x + 1, y + 1, 5, 1)  # Middle vertical line
+    OLED12864_I2C.hline(x, y + 6, 3, 1)      # Bottom horizontal line
+    return 4 + spacing  # width of letter
+
 def space():
     return 1
-
-def one(x: int, y: int, spacing: int):
-    pass
 
 # Draw each letter and update x position
 OLED12864_I2C.clear()
@@ -280,9 +283,11 @@ def draw_text(text: str, x: int, y: int, spacing: int):
         elif char == '^':
             x = 0
             y += 9
+        elif char == '1':
+            x += one(x, y, spacing)
 
 # Starting position
 x = 0  # starting x position
 y = 0  # starting y position
 spacing = 1  # space between letters
-draw_text("abcdefghijklmnopqrstuvwxyz?^lol i can write anything now^one line in^four lines in i guess^theres five^six^seven", x, y, spacing)
+draw_text("abcdefghijklmnopqrstuvwxyz?^lol 1 i can write anything now^one line in^four lines in i guess^theres five^six^seven", x, y, spacing)
