@@ -391,6 +391,39 @@ function five(x: number, y: number, spacing: number) {
 }
 
 //  width of letter
+function six(x: number, y: number, spacing: number) {
+    OLED12864_I2C.hline(x + 1, y, 2, 1)
+    //  Top horizontal line
+    OLED12864_I2C.hline(x + 1, y + 3, 2, 1)
+    //  Middle horizontal line
+    OLED12864_I2C.hline(x + 1, y + 6, 2, 1)
+    //  Bottom horizontal line
+    OLED12864_I2C.vline(x, y + 1, 5, 1)
+    //  Left vertical line
+    OLED12864_I2C.vline(x + 3, y + 4, 2, 1)
+    //  Right vertical line
+    OLED12864_I2C.pixel(x + 3, y + 1, 1)
+    return 4 + spacing
+}
+
+//  width of letter
+function seven(x: number, y: number, spacing: number) {
+    OLED12864_I2C.hline(x, y, 5, 1)
+    //  Top horizontal line
+    OLED12864_I2C.vline(x + 4, y + 1, 2, 1)
+    //  Top right vertical line
+    OLED12864_I2C.pixel(x + 3, y + 3, 1)
+    //  Middle pixel
+    OLED12864_I2C.pixel(x + 2, y + 4, 1)
+    //  Lower middle pixel
+    OLED12864_I2C.pixel(x + 1, y + 5, 1)
+    //  Lower middle pixel
+    OLED12864_I2C.pixel(x, y + 6, 1)
+    //  Bottom left pixel
+    return 5 + spacing
+}
+
+//  width of letter
 function space(): number {
     return 1
 }
@@ -473,6 +506,10 @@ function draw_text(text: string, x: number, y: number, spacing: number) {
             x += four(x, y, spacing)
         } else if (char == "5") {
             x += five(x, y, spacing)
+        } else if (char == "6") {
+            x += six(x, y, spacing)
+        } else if (char == "7") {
+            x += seven(x, y, spacing)
         } else if (char == "$") {
             x += dollar(x, y, spacing)
         }
@@ -487,4 +524,4 @@ let y = 0
 //  starting y position
 let spacing = 1
 //  space between letters
-draw_text("$12345^abcdefghijklmnopqrstuvwxyz?^lol 1 i can write anything now^one line in^four lines in i guess^theres five^six^seven", x, y, spacing)
+draw_text("$1234567^abcdefghijklmnopqrstuvwxyz?^lol 1 i can write anything now^one line in^four lines in i guess^theres five^six^seven", x, y, spacing)
