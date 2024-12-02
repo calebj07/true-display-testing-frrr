@@ -363,6 +363,34 @@ function three(x: number, y: number, spacing: number) {
 }
 
 //  width of letter
+function four(x: number, y: number, spacing: number) {
+    OLED12864_I2C.vline(x, y, 3, 1)
+    //  Left vertical line
+    OLED12864_I2C.vline(x + 3, y, 7, 1)
+    //  Right vertical line
+    OLED12864_I2C.hline(x, y + 3, 4, 1)
+    //  Middle horizontal line
+    return 4 + spacing
+}
+
+//  width of letter
+function five(x: number, y: number, spacing: number) {
+    OLED12864_I2C.hline(x, y, 4, 1)
+    //  Top horizontal line
+    OLED12864_I2C.hline(x, y + 3, 3, 1)
+    //  Middle horizontal line
+    OLED12864_I2C.hline(x, y + 6, 3, 1)
+    //  Bottom horizontal line
+    OLED12864_I2C.vline(x, y, 4, 1)
+    //  Left vertical line
+    OLED12864_I2C.pixel(x + 3, y + 4, 1)
+    //  Middle right pixel
+    OLED12864_I2C.pixel(x + 3, y + 5, 1)
+    //  Bottom right pixel
+    return 4 + spacing
+}
+
+//  width of letter
 function space(): number {
     return 1
 }
@@ -441,6 +469,10 @@ function draw_text(text: string, x: number, y: number, spacing: number) {
             x += two(x, y, spacing)
         } else if (char == "3") {
             x += three(x, y, spacing)
+        } else if (char == "4") {
+            x += four(x, y, spacing)
+        } else if (char == "5") {
+            x += five(x, y, spacing)
         } else if (char == "$") {
             x += dollar(x, y, spacing)
         }
@@ -455,4 +487,4 @@ let y = 0
 //  starting y position
 let spacing = 1
 //  space between letters
-draw_text("$123^abcdefghijklmnopqrstuvwxyz?^lol 1 i can write anything now^one line in^four lines in i guess^theres five^six^seven", x, y, spacing)
+draw_text("$12345^abcdefghijklmnopqrstuvwxyz?^lol 1 i can write anything now^one line in^four lines in i guess^theres five^six^seven", x, y, spacing)

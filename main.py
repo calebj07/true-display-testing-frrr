@@ -242,6 +242,21 @@ def three(x: int, y: int, spacing: int):
     OLED12864_I2C.pixel(x, y + 5, 1)  # Bottom left pixel
     return 4 + spacing  # width of letter
 
+def four(x: int, y: int, spacing: int):
+    OLED12864_I2C.vline(x, y, 3, 1)  # Left vertical line
+    OLED12864_I2C.vline(x + 3, y, 7, 1)  # Right vertical line
+    OLED12864_I2C.hline(x, y + 3, 4, 1)  # Middle horizontal line
+    return 4 + spacing  # width of letter
+
+def five(x: int, y: int, spacing: int):
+    OLED12864_I2C.hline(x, y, 4, 1)  # Top horizontal line
+    OLED12864_I2C.hline(x, y + 3, 3, 1)  # Middle horizontal line
+    OLED12864_I2C.hline(x, y + 6, 3, 1)  # Bottom horizontal line
+    OLED12864_I2C.vline(x, y, 4, 1)  # Left vertical line
+    OLED12864_I2C.pixel(x + 3, y + 4, 1)  # Middle right pixel
+    OLED12864_I2C.pixel(x + 3, y + 5, 1)  # Bottom right pixel
+    return 4 + spacing  # width of letter
+
 def space():
     return 1
 
@@ -317,6 +332,10 @@ def draw_text(text: str, x: int, y: int, spacing: int):
             x += two(x, y, spacing)
         elif char == '3':
             x += three(x, y, spacing)
+        elif char == '4':
+            x += four(x, y, spacing)
+        elif char == '5':
+            x += five(x, y, spacing)
         elif char == '$':
             x += dollar(x, y, spacing)
 
@@ -324,4 +343,4 @@ def draw_text(text: str, x: int, y: int, spacing: int):
 x = 0  # starting x position
 y = 0  # starting y position
 spacing = 1  # space between letters
-draw_text("$123^abcdefghijklmnopqrstuvwxyz?^lol 1 i can write anything now^one line in^four lines in i guess^theres five^six^seven", x, y, spacing)
+draw_text("$12345^abcdefghijklmnopqrstuvwxyz?^lol 1 i can write anything now^one line in^four lines in i guess^theres five^six^seven", x, y, spacing)
