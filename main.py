@@ -208,10 +208,38 @@ def qs(x: int, y: int, spacing: int):
     OLED12864_I2C.pixel(x + 1, y + 6, 1)     # Bottom dot
     return 4 + spacing  # width of letter
 
+def dollar(x: int, y: int, spacing: int):
+    OLED12864_I2C.vline(x + 2, y, 7, 1)  # Vertical line
+    OLED12864_I2C.hline(x + 1, y + 1, 4, 1)  # Top horizontal line
+    OLED12864_I2C.hline(x + 1, y + 3, 3, 1)  # Middle horizontal line
+    OLED12864_I2C.hline(x, y + 5, 4, 1)  # Bottom horizontal line
+    OLED12864_I2C.pixel(x, y + 2, 1)  # Top left pixel
+    OLED12864_I2C.pixel(x + 4, y + 4, 1)  # Bottom right pixel
+    return 5 + spacing  # width of letter
+
 def one(x: int, y: int, spacing: int):
-    OLED12864_I2C.pixel(x, y + 1, 1)         # Top dot
-    OLED12864_I2C.vline(x + 1, y + 1, 5, 1)  # Middle vertical line
+    OLED12864_I2C.pixel(x, y, 1)         # Top dot
+    OLED12864_I2C.vline(x + 1, y, 6, 1)  # Middle vertical line
     OLED12864_I2C.hline(x, y + 6, 3, 1)      # Bottom horizontal line
+    return 3 + spacing  # width of letter
+
+def two(x: int, y: int, spacing: int):
+    OLED12864_I2C.hline(x + 1, y, 2, 1)  # Top horizontal line
+    OLED12864_I2C.pixel(x, y + 1, 1)  # Top left pixel
+    OLED12864_I2C.vline(x + 3, y + 1, 3, 1)  # Vertical line
+    OLED12864_I2C.pixel(x + 1, y + 5, 1)  # Middle pixel
+    OLED12864_I2C.pixel(x + 2, y + 4, 1)  # Middle pixel
+    OLED12864_I2C.hline(x, y + 6, 4, 1)  # Bottom horizontal line
+    return 4 + spacing  # width of letter
+
+def three(x: int, y: int, spacing: int):
+    OLED12864_I2C.hline(x + 1, y, 2, 1)  # Top horizontal line
+    OLED12864_I2C.hline(x + 1, y + 3, 2, 1)  # Middle horizontal line
+    OLED12864_I2C.hline(x + 1, y + 6, 2, 1)  # Bottom horizontal line
+    OLED12864_I2C.vline(x + 3, y + 1, 2, 1)  # Top vertical line
+    OLED12864_I2C.vline(x + 3, y + 4, 2, 1)  # Bottom vertical line
+    OLED12864_I2C.pixel(x, y + 1, 1)  # Top left pixel
+    OLED12864_I2C.pixel(x, y + 5, 1)  # Bottom left pixel
     return 4 + spacing  # width of letter
 
 def space():
@@ -285,9 +313,15 @@ def draw_text(text: str, x: int, y: int, spacing: int):
             y += 9
         elif char == '1':
             x += one(x, y, spacing)
+        elif char == '2':
+            x += two(x, y, spacing)
+        elif char == '3':
+            x += three(x, y, spacing)
+        elif char == '$':
+            x += dollar(x, y, spacing)
 
 # Starting position
 x = 0  # starting x position
 y = 0  # starting y position
 spacing = 1  # space between letters
-draw_text("abcdefghijklmnopqrstuvwxyz?^lol 1 i can write anything now^one line in^four lines in i guess^theres five^six^seven", x, y, spacing)
+draw_text("$123^abcdefghijklmnopqrstuvwxyz?^lol 1 i can write anything now^one line in^four lines in i guess^theres five^six^seven", x, y, spacing)

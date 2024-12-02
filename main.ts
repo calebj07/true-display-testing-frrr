@@ -299,13 +299,66 @@ function qs(x: number, y: number, spacing: number) {
 }
 
 //  width of letter
+function dollar(x: number, y: number, spacing: number) {
+    OLED12864_I2C.vline(x + 2, y, 7, 1)
+    //  Vertical line
+    OLED12864_I2C.hline(x + 1, y + 1, 4, 1)
+    //  Top horizontal line
+    OLED12864_I2C.hline(x + 1, y + 3, 3, 1)
+    //  Middle horizontal line
+    OLED12864_I2C.hline(x, y + 5, 4, 1)
+    //  Bottom horizontal line
+    OLED12864_I2C.pixel(x, y + 2, 1)
+    //  Top left pixel
+    OLED12864_I2C.pixel(x + 4, y + 4, 1)
+    //  Bottom right pixel
+    return 5 + spacing
+}
+
+//  width of letter
 function one(x: number, y: number, spacing: number) {
-    OLED12864_I2C.pixel(x, y + 1, 1)
+    OLED12864_I2C.pixel(x, y, 1)
     //  Top dot
-    OLED12864_I2C.vline(x + 1, y + 1, 5, 1)
+    OLED12864_I2C.vline(x + 1, y, 6, 1)
     //  Middle vertical line
     OLED12864_I2C.hline(x, y + 6, 3, 1)
     //  Bottom horizontal line
+    return 3 + spacing
+}
+
+//  width of letter
+function two(x: number, y: number, spacing: number) {
+    OLED12864_I2C.hline(x + 1, y, 2, 1)
+    //  Top horizontal line
+    OLED12864_I2C.pixel(x, y + 1, 1)
+    //  Top left pixel
+    OLED12864_I2C.vline(x + 3, y + 1, 3, 1)
+    //  Vertical line
+    OLED12864_I2C.pixel(x + 1, y + 5, 1)
+    //  Middle pixel
+    OLED12864_I2C.pixel(x + 2, y + 4, 1)
+    //  Middle pixel
+    OLED12864_I2C.hline(x, y + 6, 4, 1)
+    //  Bottom horizontal line
+    return 4 + spacing
+}
+
+//  width of letter
+function three(x: number, y: number, spacing: number) {
+    OLED12864_I2C.hline(x + 1, y, 2, 1)
+    //  Top horizontal line
+    OLED12864_I2C.hline(x + 1, y + 3, 2, 1)
+    //  Middle horizontal line
+    OLED12864_I2C.hline(x + 1, y + 6, 2, 1)
+    //  Bottom horizontal line
+    OLED12864_I2C.vline(x + 3, y + 1, 2, 1)
+    //  Top vertical line
+    OLED12864_I2C.vline(x + 3, y + 4, 2, 1)
+    //  Bottom vertical line
+    OLED12864_I2C.pixel(x, y + 1, 1)
+    //  Top left pixel
+    OLED12864_I2C.pixel(x, y + 5, 1)
+    //  Bottom left pixel
     return 4 + spacing
 }
 
@@ -384,6 +437,12 @@ function draw_text(text: string, x: number, y: number, spacing: number) {
             y += 9
         } else if (char == "1") {
             x += one(x, y, spacing)
+        } else if (char == "2") {
+            x += two(x, y, spacing)
+        } else if (char == "3") {
+            x += three(x, y, spacing)
+        } else if (char == "$") {
+            x += dollar(x, y, spacing)
         }
         
     }
@@ -396,4 +455,4 @@ let y = 0
 //  starting y position
 let spacing = 1
 //  space between letters
-draw_text("abcdefghijklmnopqrstuvwxyz?^lol 1 i can write anything now^one line in^four lines in i guess^theres five^six^seven", x, y, spacing)
+draw_text("$123^abcdefghijklmnopqrstuvwxyz?^lol 1 i can write anything now^one line in^four lines in i guess^theres five^six^seven", x, y, spacing)
