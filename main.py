@@ -217,6 +217,18 @@ def dollar(x: int, y: int, spacing: int):
     OLED12864_I2C.pixel(x + 4, y + 4, 1)  # Bottom right pixel
     return 5 + spacing  # width of letter
 
+def o_parenthesis(x: int, y: int, spacing: int):
+    OLED12864_I2C.pixel(x + 1, y, 1)
+    OLED12864_I2C.vline(x, y + 1, 5, 1)
+    OLED12864_I2C.pixel(x + 1, y + 6, 1)
+    return 2 + spacing  # width of character
+
+def c_parenthesis(x: int, y: int, spacing: int):
+    OLED12864_I2C.vline(x + 1, y + 1, 5, 1)
+    OLED12864_I2C.pixel(x, y, 1)
+    OLED12864_I2C.pixel(x, y + 6, 1)
+    return 2 + spacing  # width of character
+
 def one(x: int, y: int, spacing: int):
     OLED12864_I2C.pixel(x, y, 1)         # Top dot
     OLED12864_I2C.vline(x + 1, y, 6, 1)  # Middle vertical line
@@ -301,6 +313,11 @@ def zero(x: int, y: int, spacing: int):
     OLED12864_I2C.vline(x + 3, y + 1, 5, 1)  # Right vertical line
     return 4 + spacing  # width of letter
 
+def plus(x: int, y: int, spacing: int):
+    OLED12864_I2C.vline(x + 2, y + 1, 5, 1)   # Vertical line in the middle
+    OLED12864_I2C.hline(x, y + 3, 5, 1)   # Horizontal line in the middle
+    return 5 + spacing  # width of character
+
 def caps_w(x: int, y: int, spacing: int):
     OLED12864_I2C.vline(x, y, 6, 1)  # Left vertical line
     OLED12864_I2C.vline(x + 4, y, 6, 1)  # Right vertical line
@@ -314,6 +331,66 @@ def caps_h(x: int, y: int, spacing: int):
     OLED12864_I2C.vline(x + 3, y, 7, 1)  # Right vertical line
     OLED12864_I2C.hline(x, y + 3, 4, 1)  # Middle horizontal line
     return 4 + spacing  # width of letter
+
+def caps_p(x: int, y: int, spacing: int):
+    OLED12864_I2C.hline(x, y, 3, 1)      # Top horizontal line
+    OLED12864_I2C.vline(x, y, 7, 1)      # Left vertical line
+    OLED12864_I2C.vline(x + 3, y + 1, 2, 1)  # Right vertical line
+    OLED12864_I2C.hline(x, y + 3, 3, 1)  # Middle horizontal line
+    return 4 + spacing  # width of character
+
+def caps_a(x: int, y: int, spacing: int):
+    OLED12864_I2C.pixel(x + 2, y, 1)     # Pixel at (x+2, y)
+    OLED12864_I2C.pixel(x + 1, y + 1, 1) # Pixel at (x+1, y+1)
+    OLED12864_I2C.pixel(x + 3, y + 1, 1) # Pixel at (x+3, y+1)
+    OLED12864_I2C.vline(x, y + 2, 5, 1)  # Vertical line from (x, y+2) to (x, y+6)
+    OLED12864_I2C.vline(x + 4, y + 2, 5, 1)  # Vertical line from (x+4, y+2) to (x+4, y+6)
+    OLED12864_I2C.hline(x, y + 3, 5, 1)  # Horizontal line from (x, y+3) to (x+4, y+3)
+    return 5 + spacing  # width of character
+
+def caps_o(x: int, y: int, spacing: int):
+    OLED12864_I2C.hline(x + 1, y, 2, 1)     # Top horizontal line
+    OLED12864_I2C.vline(x, y + 1, 5, 1)     # Left vertical line
+    OLED12864_I2C.vline(x + 3, y + 1, 5, 1) # Right vertical line
+    OLED12864_I2C.hline(x + 1, y + 6, 2, 1) # Bottom horizontal line
+    return 4 + spacing  # width of character
+
+def caps_s(x: int, y: int, spacing: int):
+    OLED12864_I2C.hline(x + 1, y, 2, 1)     # Top horizontal line
+    OLED12864_I2C.hline(x + 1, y + 3, 2, 1) # Middle horizontal line
+    OLED12864_I2C.hline(x + 1, y + 6, 2, 1) # Bottom horizontal line
+    OLED12864_I2C.vline(x, y + 1, 2, 1)     # Top vertical line
+    OLED12864_I2C.vline(x + 3, y + 4, 2, 1) # Bottom vertical line
+    OLED12864_I2C.pixel(x + 3, y + 1, 1)    # Top right pixel
+    OLED12864_I2C.pixel(x, y + 5, 1)        # Bottom left pixel
+    return 4 + spacing  # width of character
+
+def caps_n(x: int, y: int, spacing: int):
+    OLED12864_I2C.vline(x, y, 7, 1)       # Left vertical line
+    OLED12864_I2C.vline(x + 4, y, 7, 1)   # Right vertical line
+    OLED12864_I2C.pixel(x + 2, y + 3, 1)  # Top left pixel
+    OLED12864_I2C.vline(x + 1, y + 1, 2, 1) # Left vertical line inside
+    OLED12864_I2C.vline(x + 3, y + 4, 2, 1) # Right vertical line inside
+    return 5 + spacing  # width of character
+
+def caps_d(x: int, y: int, spacing: int):
+    OLED12864_I2C.vline(x, y, 7, 1)       # Left vertical line
+    OLED12864_I2C.hline(x + 1, y, 2, 1)   # Top horizontal line
+    OLED12864_I2C.hline(x + 1, y + 6, 2, 1) # Bottom horizontal line
+    OLED12864_I2C.vline(x + 3, y + 1, 5, 1) # Right vertical line
+    return 4 + spacing  # width of character
+
+def caps_y(x: int, y: int, spacing: int):
+    OLED12864_I2C.pixel(x, y, 1)          # Top left pixel
+    OLED12864_I2C.pixel(x + 4, y, 1)      # Top right pixel
+    OLED12864_I2C.pixel(x + 1, y + 1, 1)  # Second row left pixel
+    OLED12864_I2C.pixel(x + 3, y + 1, 1)  # Second row right pixel
+    OLED12864_I2C.vline(x + 2, y + 2, 5, 1) # Vertical line in the middle
+    return 5 + spacing  # width of character
+
+def period(x: int, y: int, spacing: int):
+    OLED12864_I2C.pixel(x, y + 6, 1)
+    return 1 + spacing  # width of character
 
 def space():
     return 1
@@ -410,9 +487,99 @@ def draw_text(text: str, x: int, y: int, spacing: int):
             x += caps_h(x, y, spacing)
         elif char == '$':
             x += dollar(x, y, spacing)
+        elif char == '(':
+            x += o_parenthesis(x, y, spacing)
+        elif char == ')':
+            x += c_parenthesis(x, y, spacing)
+        elif char == '.':
+            x += period(x, y, spacing)
+        elif char == 'P':
+            x += caps_p(x, y, spacing)
+        elif char == 'A':
+            x += caps_a(x, y, spacing)
+        elif char == 'O':
+            x += caps_o(x, y, spacing)
+        elif char == 'S':
+            x += caps_s(x, y, spacing)
+        elif char == 'N':
+            x += caps_n(x, y, spacing)
+        elif char == '+':
+            x += plus(x, y, spacing)
+        elif char == 'D':
+            x += caps_d(x, y, spacing)
+        elif char == 'Y':
+            x += caps_y(x, y, spacing)
 
-# Starting position
+def you_chose(selection, y):
+    draw_text("You chose " + selection + ".", 0, y, spacing)
+    basic.pause(2000)
+#ACTUAL CODE IS BELOW, NORMAL FUNCTIONS ABOVE
+
+pins.set_pull(DigitalPin.P0, PinPullMode.PULL_UP)
+pins.set_pull(DigitalPin.P1, PinPullMode.PULL_UP)
+pins.set_pull(DigitalPin.P2, PinPullMode.PULL_UP)
+
+
+
+
 x = 0  # starting x position
 y = 0  # starting y position
 spacing = 1  # space between letters
-draw_text("$1234567890WwHh^abcdefghijklmnopqrstuvwxyz?^lol 1 i can write anything now^one line in^four lines in i guess^theres five^six^seven", x, y, spacing)
+answered = False
+draw_text("What is your budget?^1.  $500 and below^2.  $500 to $800^3.  $800 and above", x, y, spacing)
+while not answered:
+    if pins.digital_read_pin(DigitalPin.P0) == 0:
+        answered = True
+        answer1 = 1
+        OLED12864_I2C.clear()
+        you_chose("$500 and below", 9)
+    elif pins.digital_read_pin(DigitalPin.P1) == 0:
+        answered = True
+        answer1 = 2
+        OLED12864_I2C.clear()
+        you_chose("$500 to $800", 18)
+    elif pins.digital_read_pin(DigitalPin.P2) == 0:
+        answered = True
+        answer1 = 3
+        OLED12864_I2C.clear()
+        you_chose("$800 and above", 27)
+OLED12864_I2C.clear()
+draw_text("Preferred operating system?^1.  Android^2.  iOS^3.  No preference", x, y, spacing)
+answered = False
+while not answered:
+    if pins.digital_read_pin(DigitalPin.P0) == 0:
+        answered = True
+        answer2 = 1
+        OLED12864_I2C.clear()
+        you_chose("Android", 9)
+    elif pins.digital_read_pin(DigitalPin.P1) == 0:
+        answered = True
+        answer2 = 2
+        OLED12864_I2C.clear()
+        you_chose("iOS", 18)
+    elif pins.digital_read_pin(DigitalPin.P2) == 0:
+        answered = True
+        answer2 = 3
+        OLED12864_I2C.clear()
+        draw_text("You did not have a preference.", x, 27, spacing)
+        basic.pause(2000)
+
+OLED12864_I2C.clear()
+draw_text("Desired refresh rate?^1.  60Hz^2.  90Hz^3.  120Hz+", x, y, spacing)
+answered = False
+while not answered:
+    if pins.digital_read_pin(DigitalPin.P0) == 0:
+        answered = True
+        answer3 = 1
+        OLED12864_I2C.clear()
+        you_chose("60Hz", 9)
+    elif pins.digital_read_pin(DigitalPin.P1) == 0:
+        answered = True
+        answer3 = 2
+        OLED12864_I2C.clear()
+        you_chose("90Hz", 18)
+    elif pins.digital_read_pin(DigitalPin.P2) == 0:
+        answered = True
+        answer3 = 3
+        OLED12864_I2C.clear()
+        you_chose("120Hz+", 27)
